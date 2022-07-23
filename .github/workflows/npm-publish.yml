@@ -29,6 +29,8 @@ jobs:
         run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}" --no-git-tag-version
       - name: 'Install dependencies'
         run: yarn install
+        env:
+          REGISTRY_SERVER: "https://registry.yarnpkg.com"
       - name: 'Build package'
         run: yarn build
       - name: "Publish package"
