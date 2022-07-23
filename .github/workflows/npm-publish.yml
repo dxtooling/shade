@@ -35,3 +35,4 @@ jobs:
         run: yarn publish next
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          REGISTRY_SERVER: "https://registry.npmjs.org"
