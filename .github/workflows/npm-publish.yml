@@ -29,12 +29,10 @@ jobs:
         run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}" --no-git-tag-version
       - name: 'Install dependencies'
         run: yarn install
-        env:
-          REGISTRY_SERVER: "https://registry.yarnpkg.com"
       - name: 'Build package'
         run: yarn build
       - name: "Publish package"
         run: yarn publish next
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          REGISTRY_SERVER: "https://registry.npmjs.org"
+          PUBLISH_REGISTRY: "https://registry.npmjs.org"
