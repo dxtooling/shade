@@ -6,8 +6,10 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+      - name: 'Setup Node'
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
@@ -22,8 +24,11 @@ jobs:
         run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
       - name: 'Set package version'
         run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}" --no-git-tag-version
-      - run: yarn install
-      - run: yarn build
-      - run: echo yarn publish next
+      - name: 'Install dependencies'
+        run: yarn install
+      - name: 'Build package'
+        run: yarn build
+      - name: "Publish package"
+        run: echo yarn publish next
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
