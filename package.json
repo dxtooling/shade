@@ -23,7 +23,10 @@
   "peerDependencies": {
     "react": "^18.2.0"
   },
-  "files": [ "dist", "README.md" ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dxtooling/shade.git"
