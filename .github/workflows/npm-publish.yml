@@ -1,0 +1,30 @@
+name: Build
+
+on: [push]
+
+jobs:
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+          scope: "@dxtooling"
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.1.0
+      - name: 'Get short sha'
+        id: sha_short
+        run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: 'Set package version'
+        run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}
+      - run: yarn install
+      - run: yarn build
+      - run: yarn publish next
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
