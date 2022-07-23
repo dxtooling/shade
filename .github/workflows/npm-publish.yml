@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,9 +21,9 @@ jobs:
         id: sha_short
         run: echo "::set-output name=sha::$(echo ${GITHUB_SHA} | cut -c1-8)"
       - name: 'Set package version'
-        run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}
+        run: npm version "${{ steps.previoustag.outputs.tag }}-${{ steps.sha_short.outputs.sha }}" --no-git-tag-version
       - run: yarn install
       - run: yarn build
-      - run: yarn publish next
+      - run: echo yarn publish next
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
