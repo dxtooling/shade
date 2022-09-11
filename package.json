@@ -9,15 +9,30 @@
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build",
-    "publish": "yarn npm publish --access public --tag"
+    "publish": "yarn npm publish --access public --tag",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@mdx-js/react": "^1.6.22",
     "@parcel/packager-ts": "2.6.2",
     "@parcel/transformer-typescript-types": "2.6.2",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-docs": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack4": "^6.5.9",
+    "@storybook/manager-webpack4": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.15",
     "@yarnpkg/sdks": "^3.0.0-rc.14",
+    "babel-loader": "^8.2.5",
     "parcel": "^2.6.2",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": ">=3.0.0"
   },
   "peerDependencies": {
